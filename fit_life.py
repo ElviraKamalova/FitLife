@@ -10,31 +10,36 @@ name = name.title()
 user_name = name
 print(f'Привет, {user_name}!')
 
-age = input('Введи свой возраст:')
-user_age = int(age)
+user_age = int(input('Введи свой возраст:'))
 
 
 # 2. Сбор данных
 
-weight = input('Введи свой вес в кг:')
-user_weght = float(weight)
-
-height = input('Введи свой рост в м (например, 1.70):')
-user_height = float(height)
+user_weight = float(input('Введи свой вес в кг:'))
+while True:
+    user_height = input('Введи свой рост в м (например: 1.70):')
+    try:
+        user_height = float(user_height)
+        if user_height < 100:
+            break
+        else:
+            print('Убедись, что введено значение в метрах (используй точку)')
+    except ValueError:
+        print('Введи числовое значение в метрах (используй точку)')
 
 
 # 3. Расчеты:
-
 #  Индекса массы тела (ИМТ)
-BMI = user_weght / (user_height ** 2)
+BMI = user_weight / (user_height ** 2)
 
 # Расчет нормы потребления воды
-water_needed = (user_weght * 30) / 1000
+# Объявляем константы:
+ML_PER_KG = 30
+ML_TO_L = 1000
+water_needed = user_weight * ML_PER_KG / ML_TO_L
 
 # Отчет
 
-print(f'Отчет для пользователя: {user_name},  ({user_age} г.)')
-print(f'ИМТ: {round(BMI, 1)}')
-print(f'Рекомендуемая норма воды: {water_needed} л. в день.')
-
-print("Расчет окончен. Будьте здоровы!")
+print(f'Отчет для пользователя: {user_name} {user_age} г.', f'ИМТ: {BMI:.1f}',
+      f'Рекомендуемая норма воды: {water_needed:.1f} л. в день',
+      'Расчет окончен. Будьте здоровы!', sep='\n')
